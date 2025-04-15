@@ -1,0 +1,273 @@
+Based on your database schema, here are all the GraphQL endpoints that will be available through Hasura. I'll organize them by entity and include request and response formats:
+1. Customer Endpoints
+GET /api/customers
+Query Parameters:
+- skip: int (default: 0)
+- limit: int (default: 100)
+
+Response:
+{
+  "customers": [
+    {
+      "id": 1,
+      "company_name": "Example Corp",
+      "contact_person": "John Doe",
+      "email": "john@example.com",
+      "phone": "+1234567890",
+      "address": "123 Main St",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  ]
+}
+
+Get Single Customer:
+GET /api/customers/{customer_id}
+
+Response:
+{
+  "id": 1,
+  "company_name": "Example Corp",
+  "contact_person": "John Doe",
+  "email": "john@example.com",
+  "phone": "+1234567890",
+  "address": "123 Main St",
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
+}
+POST /api/customers
+Content-Type: application/json
+
+Create Customer:
+Request Body:
+{
+  "company_name": "New Company",
+  "contact_person": "Jane Doe",
+  "email": "jane@newcompany.com",
+  "phone": "+1987654321",
+  "address": "456 Oak St"
+}
+
+Response:
+{
+  "id": 2,
+  "company_name": "New Company",
+  "contact_person": "Jane Doe",
+  "email": "jane@newcompany.com",
+  "phone": "+1987654321",
+  "address": "456 Oak St",
+  "created_at": "2024-01-01T00:00:00Z"
+}
+Update Customer:
+PUT /api/customers/{customer_id}
+Content-Type: application/json
+
+Request Body:
+{
+  "contact_person": "Updated Name",
+  "email": "updated@example.com"
+}
+
+Response:
+{
+  "id": 1,
+  "company_name": "Example Corp",
+  "contact_person": "Updated Name",
+  "email": "updated@example.com",
+  "phone": "+1234567890",
+  "address": "123 Main St",
+  "updated_at": "2024-01-01T00:00:00Z"
+}
+Delete Customer:
+DELETE /api/customers/{customer_id}
+
+Response:
+{
+  "message": "Customer deleted successfully"
+}
+
+Get All Quotes:
+GET /api/quotes
+Query Parameters:
+- skip: int (default: 0)
+- limit: int (default: 100)
+
+Response:
+{
+  "quotes": [
+    {
+      "id": 1,
+      "title": "Sample Quote",
+      "reference_number": "Q-001",
+      "validity_date": "2024-12-31T00:00:00Z",
+      "customer_id": 1,
+      "predicted_price": 950.00,
+      "final_price": 1000.00,
+      "status": "approved",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  ]
+}
+Create Quote:
+POST /api/quotes
+Content-Type: application/json
+
+Request Body:
+{
+  "title": "New Quote",
+  "reference_number": "Q-002",
+  "validity_date": "2024-12-31T00:00:00Z",
+  "customer_id": 1,
+  "status": "draft"
+}
+
+Response:
+{
+  "id": 2,
+  "title": "New Quote",
+  "reference_number": "Q-002",
+  "validity_date": "2024-12-31T00:00:00Z",
+  "customer_id": 1,
+  "status": "draft",
+  "created_at": "2024-01-01T00:00:00Z"
+}
+
+Update Quote:
+PUT /api/quotes/{quote_id}
+Content-Type: application/json
+
+Request Body:
+{
+  "status": "approved",
+  "final_price": 1000.00
+}
+
+Response:
+{
+  "id": 1,
+  "title": "Sample Quote",
+  "reference_number": "Q-001",
+  "validity_date": "2024-12-31T00:00:00Z",
+  "customer_id": 1,
+  "predicted_price": 950.00,
+  "final_price": 1000.00,
+  "status": "approved",
+  "updated_at": "2024-01-01T00:00:00Z"
+}
+
+DELETE /api/quotes/{quote_id}
+
+Response:
+{
+  "message": "Quote deleted successfully"
+}
+
+Create Product Specification:
+POST /api/quotes/{quote_id}/product-specs
+Content-Type: application/json
+
+Request Body:
+{
+  "description": "Aluminum Profile",
+  "profile_type": "T-Slot",
+  "alloy": "6063",
+  "weight_per_meter": 1.5,
+  "total_length": 1000,
+  "surface_treatment": "Anodized",
+  "machining_complexity": "Medium"
+}
+
+Response:
+{
+  "id": 1,
+  "quote_id": 1,
+  "description": "Aluminum Profile",
+  "profile_type": "T-Slot",
+  "alloy": "6063",
+  "weight_per_meter": 1.5,
+  "total_length": 1000,
+  "surface_treatment": "Anodized",
+  "machining_complexity": "Medium"
+}
+
+get Single Quote:
+GET /api/quotes/{quote_id}
+
+Response:
+{
+  "id": 1,
+  "title": "Sample Quote",
+  "reference_number": "Q-001",
+  "validity_date": "2024-12-31T00:00:00Z",
+  "customer_id": 1,
+  "predicted_price": 950.00,
+  "final_price": 1000.00,
+  "status": "approved",
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
+}
+
+Create Product Specification:
+POST /api/quotes/{quote_id}/product-specs
+Content-Type: application/json
+
+Request Body:
+{
+  "description": "Aluminum Profile",
+  "profile_type": "T-Slot",
+  "alloy": "6063",
+  "weight_per_meter": 1.5,
+  "total_length": 1000,
+  "surface_treatment": "Anodized",
+  "machining_complexity": "Medium"
+}
+
+Response:
+{
+  "id": 1,
+  "quote_id": 1,
+  "description": "Aluminum Profile",
+  "profile_type": "T-Slot",
+  "alloy": "6063",
+  "weight_per_meter": 1.5,
+  "total_length": 1000,
+  "surface_treatment": "Anodized",
+  "machining_complexity": "Medium"
+}
+Create Communication Context:
+POST /api/quotes/{quote_id}/communication-contexts
+Content-Type: application/json
+
+Request Body:
+{
+  "context_text": "Urgent request for aluminum profiles",
+  "extracted_urgency": "High",
+  "custom_requests": "Special packaging required",
+  "past_agreements": "Previous discount of 5%"
+}
+
+Response:
+{
+  "id": 1,
+  "quote_id": 1,
+  "context_text": "Urgent request for aluminum profiles",
+  "extracted_urgency": "High",
+  "custom_requests": "Special packaging required",
+  "past_agreements": "Previous discount of 5%"
+}
+Error Responses:
+400 Bad Request:
+{
+  "detail": "Invalid request data"
+}
+
+404 Not Found:
+{
+  "detail": "Resource not found"
+}
+
+500 Internal Server Error:
+{
+  "detail": "Internal server error"
+}
