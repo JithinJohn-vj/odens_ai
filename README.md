@@ -1,6 +1,6 @@
 # Quote AI System
 
-A full-stack application for generating quotes using AI, with both frontend and backend components.
+A full-stack application for generating quotation  using AI, with both frontend and backend components.
 
 ## Project Structure
 
